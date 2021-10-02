@@ -1,0 +1,11 @@
+name: lint
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: my-step
+       run: make lint
