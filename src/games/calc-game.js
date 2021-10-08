@@ -13,8 +13,8 @@ const chooseAnOperation = () => {
   const numOfPlus = 0;
   const numOfMinus = 1;
   const numOfMult = 2;
-  const numOpOperation = generateRandomNum(upperNumOfOperation);
-  switch (numOpOperation) {
+  const numOfOperation = generateRandomNum(upperNumOfOperation);
+  switch (numOfOperation) {
     case numOfPlus:
       operation = '+';
       break;
@@ -30,17 +30,17 @@ const chooseAnOperation = () => {
   return operation;
 };
 
-const calcTheCorrectAnswer = (first, second, operation) => {
+const calcTheCorrectAnswer = (firstNum, secondNum, operation) => {
   let result = 0;
   switch (operation) {
     case '+':
-      result = first + second;
+      result = firstNum + secondNum;
       break;
     case '-':
-      result = first - second;
+      result = firstNum - secondNum;
       break;
     case '*':
-      result = first * second;
+      result = firstNum * secondNum;
       break;
     default:
       break;
