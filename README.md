@@ -4,3 +4,4 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/e598f4754b64db373440/maintainability)](https://codeclimate.com/github/Tatiana-Popova/frontend-project-lvl1/maintainability)
 [![asciicast](https://asciinema.org/a/JFwbVcpfeJZbQgIFsiik8htFE.svg)](https://asciinema.org/a/JFwbVcpfeJZbQgIFsiik8htFE)
 [![asciicast](https://asciinema.org/a/RWYsHqYGUaFCos01kzKYkQSMJ.svg)](https://asciinema.org/a/RWYsHqYGUaFCos01kzKYkQSMJ)
+[![asciicast](https://asciinema.org/a/38WMnLvt2Nlp6wkjmfyq7Wega.svg)](https://asciinema.org/a/38WMnLvt2Nlp6wkjmfyq7Wega)
