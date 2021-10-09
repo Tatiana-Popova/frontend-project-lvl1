@@ -5,8 +5,9 @@ export const takeUserName = () => {
   return userName;
 };
 
-export const generateRandomNum = (upperNum) => {
-  const randomNum = parseInt(Math.random() * upperNum, 10);
+export const generateRandomNum = (upperNum, lowerNum = 1) => {
+  const randomNum =
+    Math.floor(Math.random() * (upperNum - lowerNum)) + lowerNum;
   return randomNum;
 };
 
