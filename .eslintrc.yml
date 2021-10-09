@@ -6,4 +6,10 @@ extends:
 parserOptions:
   ecmaVersion: 12
   sourceType: module
-rules: { 'no-console': 'off', 'import/extensions': 'off', 'eqeqeq': 'off' }
+rules:
+  {
+    'no-console': 'off',
+    'import/extensions': 'off',
+    'eqeqeq': 'off',
+    'operator-linebreak': 'off',
+  }
