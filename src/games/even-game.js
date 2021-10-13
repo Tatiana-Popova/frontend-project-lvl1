@@ -30,7 +30,7 @@ const evenGame = () => {
     const randomNum = generateRandomNum(upperNum);
     console.log(`Question: ${randomNum}`);
     const usersAnswer = readlineSync.question('Your answer: ');
-    const rightAnswer = evenCheck(randomNum);
+    const rightAnswer = evenCheck(randomNum).toString();
 
     const isAnswerCorrect = compareAnswersFunc(
       rightAnswer,

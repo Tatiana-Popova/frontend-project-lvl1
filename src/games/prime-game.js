@@ -34,7 +34,7 @@ const primeGame = () => {
 
     console.log(`Question: ${randomNum}`);
     const usersAnswer = readlineSync.question('Your answer: ');
-    const rightAnswer = checkForPrime(randomNum);
+    const rightAnswer = checkForPrime(randomNum).toString();
     const isAnswerCorrect = compareAnswersFunc(
       rightAnswer,
       usersAnswer,

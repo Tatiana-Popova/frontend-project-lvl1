@@ -63,7 +63,10 @@ const progressionGame = () => {
 
     console.log(`Question: ${progressionStr}`);
     const usersAnswer = readlineSync.question('Your answer: ');
-    const rightAnswer = findRightAnswer(progressionArr, randomIndexForClose);
+    const rightAnswer = findRightAnswer(
+      progressionArr,
+      randomIndexForClose,
+    ).toString();
     const isAnswerCorrect = compareAnswersFunc(
       rightAnswer,
       usersAnswer,

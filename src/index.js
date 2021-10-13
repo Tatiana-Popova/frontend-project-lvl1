@@ -18,7 +18,7 @@ export const greetUser = (userName) => {
 
 export const compareAnswersFunc = (rightAnswer, usersAnswer, userName) => {
   let check = true;
-  if (rightAnswer == usersAnswer) {
+  if (rightAnswer === usersAnswer) {
     console.log('Correct!');
     check = true;
   } else {

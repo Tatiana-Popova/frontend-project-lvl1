@@ -57,8 +57,13 @@ const gcdGame = () => {
 
     console.log(`Question: ${firstRandomNum} ${secondRandomNum}`);
     const usersAnswer = readlineSync.question('Your answer: ');
-    const rightAnswer = findGcd(firstRandomNum, secondRandomNum);
-
+    const rightAnswer = findGcd(firstRandomNum, secondRandomNum).toString();
+    console.log(
+      usersAnswer,
+      typeof usersAnswer,
+      rightAnswer,
+      typeof rightAnswer,
+    );
     const isAnswerCorrect = compareAnswersFunc(
       rightAnswer,
       usersAnswer,

@@ -68,7 +68,7 @@ const calcGame = () => {
       firstRandomNum,
       secondRandomNum,
       operation,
-    );
+    ).toString();
 
     const isAnswerCorrect = compareAnswersFunc(
       rightAnswer,
