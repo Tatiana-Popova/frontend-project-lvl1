@@ -1,11 +1,5 @@
-import readlineSync from 'readline-sync';
-import {
-  takeUserName,
-  generateRandomNum,
-  greetUser,
-  compareAnswersFunc,
-  congratulate,
-} from '../index.js';
+import generateRandomNum from '../generateRandomNum.js';
+import { gameEngine, gameSteps } from '../index.js';
 
 const evenCheck = (num) => {
   let isNumEven = 'yes';
@@ -17,31 +11,23 @@ const evenCheck = (num) => {
   return isNumEven;
 };
 
+const generateQuestionAndAnswer = () => {
+  const upperNum = 101;
+  const randomNum = generateRandomNum(upperNum);
+  const question = `Question: ${randomNum}`;
+  const rightAnswer = evenCheck(randomNum).toString();
+  return [question, rightAnswer];
+};
+
 const evenGame = () => {
-  const userName = takeUserName();
-  let rightAnswerCount = 0;
-  const gameSteps = 3;
-  const upperNum = 1001;
-
-  greetUser(userName);
-  console.log('Answer "yes" if the number is even, otherwise answer "no".');
-
-  while (rightAnswerCount < gameSteps) {
-    const randomNum = generateRandomNum(upperNum);
-    console.log(`Question: ${randomNum}`);
-    const usersAnswer = readlineSync.question('Your answer: ');
-    const rightAnswer = evenCheck(randomNum).toString();
-
-    const isAnswerCorrect = compareAnswersFunc(
-      rightAnswer,
-      usersAnswer,
-      userName,
-    );
-    if (isAnswerCorrect) {
-      rightAnswerCount += 1;
-    } else break;
+  const gameCondition = 'Answer "yes" if the number is even, otherwise answer "no".';
+  const arrOfQuestionsAndAnswers = [];
+  let count = 0;
+  while (count < gameSteps) {
+    arrOfQuestionsAndAnswers.push(generateQuestionAndAnswer());
+    count += 1;
   }
-  congratulate(rightAnswerCount, gameSteps, userName);
+  gameEngine(gameCondition, arrOfQuestionsAndAnswers);
 };
 
 export default evenGame;

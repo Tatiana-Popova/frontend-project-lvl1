@@ -1,11 +1,5 @@
-import readlineSync from 'readline-sync';
-import {
-  takeUserName,
-  generateRandomNum,
-  greetUser,
-  compareAnswersFunc,
-  congratulate,
-} from '../index.js';
+import generateRandomNum from '../generateRandomNum.js';
+import { gameEngine, gameSteps } from '../index.js';
 
 const CheckForTheRemainder = (disible, divider) => {
   let hasRemainder = false;
@@ -27,14 +21,8 @@ const findGcd = (firstNum, secondNum) => {
   const minNumOfTwo = firstNum < secondNum ? firstNum : secondNum;
 
   for (let counter = first; counter <= minNumOfTwo; counter += 1) {
-    const DoesTheFirstNumHaveARemainder = CheckForTheRemainder(
-      firstNum,
-      counter,
-    );
-    const DoesTheSecondNumHaveARemainder = CheckForTheRemainder(
-      secondNum,
-      counter,
-    );
+    const DoesTheFirstNumHaveARemainder = CheckForTheRemainder(firstNum, counter);
+    const DoesTheSecondNumHaveARemainder = CheckForTheRemainder(secondNum, counter);
     if (!DoesTheFirstNumHaveARemainder && !DoesTheSecondNumHaveARemainder) {
       greatestDivider = counter;
     }
@@ -42,39 +30,25 @@ const findGcd = (firstNum, secondNum) => {
   return greatestDivider;
 };
 
+const generateQuestionAndAnswer = () => {
+  const upperNum = 101;
+  const firstRandomNum = generateRandomNum(upperNum);
+  const secondRandomNum = generateRandomNum(upperNum);
+  const question = `Question: ${firstRandomNum} ${secondRandomNum}`; //
+  const rightAnswer = findGcd(firstRandomNum, secondRandomNum).toString();
+
+  return [question, rightAnswer];
+};
+
 const gcdGame = () => {
-  let rightAnswerCount = 0;
-  const gameSteps = 3;
-  const userName = takeUserName();
-
-  greetUser(userName);
-  console.log('Find the greatest common divisor of given numbers.');
-
-  while (rightAnswerCount < gameSteps) {
-    const upperNum = 101;
-    const firstRandomNum = generateRandomNum(upperNum);
-    const secondRandomNum = generateRandomNum(upperNum);
-
-    console.log(`Question: ${firstRandomNum} ${secondRandomNum}`);
-    const usersAnswer = readlineSync.question('Your answer: ');
-    const rightAnswer = findGcd(firstRandomNum, secondRandomNum).toString();
-    console.log(
-      usersAnswer,
-      typeof usersAnswer,
-      rightAnswer,
-      typeof rightAnswer,
-    );
-    const isAnswerCorrect = compareAnswersFunc(
-      rightAnswer,
-      usersAnswer,
-      userName,
-    );
-    if (isAnswerCorrect) {
-      rightAnswerCount += 1;
-    } else break;
+  const gameCondition = 'Find the greatest common divisor of given numbers.';
+  const arrOfQuestionsAndAnswers = [];
+  let count = 0;
+  while (count < gameSteps) {
+    arrOfQuestionsAndAnswers.push(generateQuestionAndAnswer());
+    count += 1;
   }
-
-  congratulate(rightAnswerCount, gameSteps, userName);
+  gameEngine(gameCondition, arrOfQuestionsAndAnswers);
 };
 
 export default gcdGame;

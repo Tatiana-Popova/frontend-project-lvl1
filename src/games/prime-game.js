@@ -1,11 +1,5 @@
-import readlineSync from 'readline-sync';
-import {
-  takeUserName,
-  generateRandomNum,
-  greetUser,
-  compareAnswersFunc,
-  congratulate,
-} from '../index.js';
+import generateRandomNum from '../generateRandomNum.js';
+import { gameEngine, gameSteps } from '../index.js';
 
 const checkForPrime = (num) => {
   let divisorCount = 0;
@@ -19,33 +13,25 @@ const checkForPrime = (num) => {
   return rightAnswer;
 };
 
+const generateQuestionAndAnswer = () => {
+  const upperNumtoGenerate = 101;
+  const lowerNumtoGenerate = 2;
+  const randomNum = generateRandomNum(upperNumtoGenerate, lowerNumtoGenerate);
+  const question = `Question: ${randomNum}`;
+  const rightAnswer = checkForPrime(randomNum).toString();
+
+  return [question, rightAnswer];
+};
+
 const primeGame = () => {
-  let rightAnswerCount = 0;
-  const gameSteps = 3;
-  const userName = takeUserName();
-
-  greetUser(userName);
-  console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
-
-  while (rightAnswerCount < gameSteps) {
-    const upperNumtoGenerate = 101;
-    const lowerNumtoGenerate = 2;
-    const randomNum = generateRandomNum(upperNumtoGenerate, lowerNumtoGenerate);
-
-    console.log(`Question: ${randomNum}`);
-    const usersAnswer = readlineSync.question('Your answer: ');
-    const rightAnswer = checkForPrime(randomNum).toString();
-    const isAnswerCorrect = compareAnswersFunc(
-      rightAnswer,
-      usersAnswer,
-      userName,
-    );
-    if (isAnswerCorrect) {
-      rightAnswerCount += 1;
-    } else break;
+  const gameCondition = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+  const arrOfQuestionsAndAnswers = [];
+  let count = 0;
+  while (count < gameSteps) {
+    arrOfQuestionsAndAnswers.push(generateQuestionAndAnswer());
+    count += 1;
   }
-
-  congratulate(rightAnswerCount, gameSteps, userName);
+  gameEngine(gameCondition, arrOfQuestionsAndAnswers);
 };
 
 export default primeGame;

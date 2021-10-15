@@ -1,11 +1,5 @@
-import readlineSync from 'readline-sync';
-import {
-  takeUserName,
-  generateRandomNum,
-  greetUser,
-  compareAnswersFunc,
-  congratulate,
-} from '../index.js';
+import generateRandomNum from '../generateRandomNum.js';
+import { gameEngine, gameSteps } from '../index.js';
 
 const chooseAnOperation = () => {
   const upperNumOfOperation = 3;
@@ -48,39 +42,27 @@ const calcTheCorrectAnswer = (firstNum, secondNum, operation) => {
   return result;
 };
 
+const generateQuestionAndAnswer = () => {
+  const upperNum = 101;
+  const firstRandomNum = generateRandomNum(upperNum);
+  const secondRandomNum = generateRandomNum(upperNum);
+  const operation = chooseAnOperation();
+
+  const question = `Question: ${firstRandomNum} ${operation} ${secondRandomNum} `;
+  const rightAnswer = calcTheCorrectAnswer(firstRandomNum, secondRandomNum, operation).toString();
+
+  return [question, rightAnswer];
+};
+
 const calcGame = () => {
-  let rightAnswerCount = 0;
-  const gameSteps = 3;
-  const userName = takeUserName();
-
-  greetUser(userName);
-  console.log('What is the result of the expression?');
-
-  while (rightAnswerCount < gameSteps) {
-    const upperNum = 101;
-    const firstRandomNum = generateRandomNum(upperNum);
-    const secondRandomNum = generateRandomNum(upperNum);
-    const operation = chooseAnOperation();
-
-    console.log(`Question: ${firstRandomNum} ${operation} ${secondRandomNum} `);
-    const usersAnswer = readlineSync.question('Your answer: ');
-    const rightAnswer = calcTheCorrectAnswer(
-      firstRandomNum,
-      secondRandomNum,
-      operation,
-    ).toString();
-
-    const isAnswerCorrect = compareAnswersFunc(
-      rightAnswer,
-      usersAnswer,
-      userName,
-    );
-    if (isAnswerCorrect) {
-      rightAnswerCount += 1;
-    } else break;
+  const gameCondition = 'What is the result of the expression?';
+  const arrOfQuestionsAndAnswers = [];
+  let count = 0;
+  while (count < gameSteps) {
+    arrOfQuestionsAndAnswers.push(generateQuestionAndAnswer());
+    count += 1;
   }
-
-  congratulate(rightAnswerCount, gameSteps, userName);
+  gameEngine(gameCondition, arrOfQuestionsAndAnswers);
 };
 
 export default calcGame;
