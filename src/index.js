@@ -8,26 +8,20 @@ export const gameEngine = (gameCondition, arrOfQuestionsAndAnswers) => {
   console.log(`Hello, ${userName}!`);
   console.log(gameCondition);
 
-  let rightAnswerCount = 0;
   for (let stepCount = 0; stepCount < arrOfQuestionsAndAnswers.length; stepCount += 1) {
     const question = arrOfQuestionsAndAnswers[stepCount][0];
     const rightAnswer = arrOfQuestionsAndAnswers[stepCount][1];
 
-    console.log(question);
+    console.log(`Question: ${question}`);
     const usersAnswer = readlineSync.question('Your answer: ');
 
-    if (rightAnswer === usersAnswer) {
-      console.log('Correct!');
-      rightAnswerCount += 1;
-    } else {
-      console.log(
-        `'${usersAnswer}' is wrong answer ;(. Correct answer was '${rightAnswer}'. \nLet's try again, ${userName}!`,
-      );
-      break;
+    if (rightAnswer !== usersAnswer) {
+      console.log(`'${usersAnswer}' is wrong answer ;(. Correct answer was '${rightAnswer}'.`);
+      console.log(`Let's try again, ${userName}!`);
+      return;
     }
-  }
 
-  if (rightAnswerCount === gameSteps) {
-    console.log(`Congratulations, ${userName}!`);
+    console.log('Correct!');
   }
+  console.log(`Congratulations, ${userName}!`);
 };

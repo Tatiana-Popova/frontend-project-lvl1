@@ -1,31 +1,26 @@
-import generateRandomNum from '../generateRandomNum.js';
+import generateRandomNumber from '../generateRandomNum.js';
 import { gameEngine, gameSteps } from '../index.js';
 
-const evenCheck = (num) => {
-  let isNumEven = 'yes';
-  if (num % 2 === 0) {
-    isNumEven = 'yes';
-  } else {
-    isNumEven = 'no';
+const gameCondition = 'Answer "yes" if the number is even, otherwise answer "no".';
+
+const isEven = (number) => {
+  if (number % 2 === 0) {
+    return true;
   }
-  return isNumEven;
+  return false;
 };
 
 const generateQuestionAndAnswer = () => {
-  const upperNum = 101;
-  const randomNum = generateRandomNum(upperNum);
-  const question = `Question: ${randomNum}`;
-  const rightAnswer = evenCheck(randomNum).toString();
+  const randomNumber = generateRandomNumber(1, 100);
+  const question = `${randomNumber}`;
+  const rightAnswer = isEven(randomNumber) ? 'yes' : 'no'.toString();
   return [question, rightAnswer];
 };
 
 const evenGame = () => {
-  const gameCondition = 'Answer "yes" if the number is even, otherwise answer "no".';
   const arrOfQuestionsAndAnswers = [];
-  let count = 0;
-  while (count < gameSteps) {
+  for (let count = 0; count < gameSteps; count += 1) {
     arrOfQuestionsAndAnswers.push(generateQuestionAndAnswer());
-    count += 1;
   }
   gameEngine(gameCondition, arrOfQuestionsAndAnswers);
 };

@@ -1,5 +1,7 @@
-import generateRandomNum from '../generateRandomNum.js';
+import generateRandomNumber from '../generateRandomNum.js';
 import { gameEngine, gameSteps } from '../index.js';
+
+const gameCondition = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
 const checkForPrime = (num) => {
   let divisorCount = 0;
@@ -9,27 +11,21 @@ const checkForPrime = (num) => {
       divisorCount += 1;
     }
   }
-  const rightAnswer = divisorCount === maxCountOfDivisors ? 'yes' : 'no';
-  return rightAnswer;
+  const isPrime = divisorCount === maxCountOfDivisors;
+  return isPrime;
 };
 
 const generateQuestionAndAnswer = () => {
-  const upperNumtoGenerate = 101;
-  const lowerNumtoGenerate = 2;
-  const randomNum = generateRandomNum(upperNumtoGenerate, lowerNumtoGenerate);
-  const question = `Question: ${randomNum}`;
-  const rightAnswer = checkForPrime(randomNum).toString();
-
+  const randomNumber = generateRandomNumber(1, 100);
+  const question = `${randomNumber}`;
+  const rightAnswer = (checkForPrime(randomNumber) ? 'yes' : 'no').toString();
   return [question, rightAnswer];
 };
 
 const primeGame = () => {
-  const gameCondition = 'Answer "yes" if given number is prime. Otherwise answer "no".';
   const arrOfQuestionsAndAnswers = [];
-  let count = 0;
-  while (count < gameSteps) {
+  for (let count = 0; count < gameSteps; count += 1) {
     arrOfQuestionsAndAnswers.push(generateQuestionAndAnswer());
-    count += 1;
   }
   gameEngine(gameCondition, arrOfQuestionsAndAnswers);
 };

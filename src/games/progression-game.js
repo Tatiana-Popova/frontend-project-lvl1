@@ -1,14 +1,13 @@
-import generateRandomNum from '../generateRandomNum.js';
+import generateRandomNumber from '../generateRandomNum.js';
 import { gameEngine, gameSteps } from '../index.js';
 
+const gameCondition = 'What number is missing in the progression?';
+
 const generateArrWithRandomNums = (lengthOfProgression) => {
-  const upperNum = 101;
-  const firstNumOfProgression = generateRandomNum(upperNum);
+  const firstNumOfProgression = generateRandomNumber(1, 100);
   const arrWithRandomNums = [firstNumOfProgression];
 
-  const upperDiffInProgression = 10;
-  const lowerDiffInProgression = -10;
-  const numDifference = generateRandomNum(upperDiffInProgression, lowerDiffInProgression);
+  const numDifference = generateRandomNumber(-10, 10);
 
   let nextNum = firstNumOfProgression + numDifference;
   for (let count = 0; count < lengthOfProgression; count += 1) {
@@ -25,32 +24,22 @@ const generateProgressionStr = (arrWithRandomNums, randomIndexForClose) => {
   return strWithProgression;
 };
 
-const findRightAnswer = (arrWithRandomNums, randomIndexForClose) => {
-  const rightAnswer = arrWithRandomNums[randomIndexForClose];
-  return rightAnswer;
-};
-
 const generateQuestionAndAnswer = () => {
-  const upperLengthOfProgression = 11;
-  const lowerLengthOfProgression = 5;
-  const lengthOfProgression = generateRandomNum(upperLengthOfProgression, lowerLengthOfProgression);
-  const randomIndexForClose = generateRandomNum(lengthOfProgression + 1);
+  const lengthOfProgression = generateRandomNumber(5, 11);
+  const randomIndexForClose = generateRandomNumber(1, lengthOfProgression);
   const progressionArr = generateArrWithRandomNums(lengthOfProgression);
   const progressionStr = generateProgressionStr(progressionArr, randomIndexForClose);
 
-  const question = `Question: ${progressionStr}`;
-  const rightAnswer = findRightAnswer(progressionArr, randomIndexForClose).toString();
+  const question = `${progressionStr}`;
+  const rightAnswer = progressionArr[randomIndexForClose].toString();
 
   return [question, rightAnswer];
 };
 
 const progressionGame = () => {
-  const gameCondition = 'What number is missing in the progression?';
   const arrOfQuestionsAndAnswers = [];
-  let count = 0;
-  while (count < gameSteps) {
+  for (let count = 0; count < gameSteps; count += 1) {
     arrOfQuestionsAndAnswers.push(generateQuestionAndAnswer());
-    count += 1;
   }
   gameEngine(gameCondition, arrOfQuestionsAndAnswers);
 };
