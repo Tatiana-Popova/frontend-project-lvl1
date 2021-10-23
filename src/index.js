@@ -8,7 +8,7 @@ export const gameEngine = (gameCondition, arrOfQuestionsAndAnswers) => {
   console.log(`Hello, ${userName}!`);
   console.log(gameCondition);
 
-  for (let stepCount of arrOfQuestionsAndAnswers) {
+  for (const stepCount of arrOfQuestionsAndAnswers) {
     const [question, rightAnswer] = stepCount;
 
     console.log(`Question: ${question}`);

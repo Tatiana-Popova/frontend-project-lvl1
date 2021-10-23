@@ -4,8 +4,6 @@ import { gameEngine, gameSteps } from '../index.js';
 const gameCondition = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
 const isPrime = (num) => {
-  let divisorCount = 0;
-  const maxCountOfDivisors = 2;
   for (let count = 2; count < num; count += 1) {
     if (num % count === 0) {
       return false;
