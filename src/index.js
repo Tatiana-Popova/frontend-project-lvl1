@@ -8,9 +8,8 @@ export const gameEngine = (gameCondition, arrOfQuestionsAndAnswers) => {
   console.log(`Hello, ${userName}!`);
   console.log(gameCondition);
 
-  for (let stepCount = 0; stepCount < arrOfQuestionsAndAnswers.length; stepCount += 1) {
-    const question = arrOfQuestionsAndAnswers[stepCount][0];
-    const rightAnswer = arrOfQuestionsAndAnswers[stepCount][1];
+  for (let stepCount of arrOfQuestionsAndAnswers) {
+    const [question, rightAnswer] = stepCount;
 
     console.log(`Question: ${question}`);
     const usersAnswer = readlineSync.question('Your answer: ');

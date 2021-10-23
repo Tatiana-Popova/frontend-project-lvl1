@@ -4,17 +4,14 @@ import { gameEngine, gameSteps } from '../index.js';
 const gameCondition = 'Find the greatest common divisor of given numbers.';
 
 const findGcd = (firstNumber, secondNumber) => {
-  let x = firstNumber;
-  let y = secondNumber;
-  while (x && y) {
-    if (x > y) {
-      x %= y;
-    } else {
-      y %= x;
-    }
+  let min = Math.min(firstNumber, secondNumber);
+  let max = Math.max(firstNumber, secondNumber);
+
+  while (min && max) {
+    [min, max] = [max % min, min];
+    console.log(min, max);
   }
-  x += y;
-  return x;
+  return max;
 };
 
 const generateQuestionAndAnswer = () => {
