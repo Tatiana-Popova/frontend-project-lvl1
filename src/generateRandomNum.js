@@ -1,4 +1,2 @@
-const generateRandomNumber = (lowerNumber, upperNumber) =>
-  Math.floor(Math.random() * (upperNumber + 1 - lowerNumber)) + lowerNumber;
-
+const generateRandomNumber = (min, max) => Math.floor(Math.random() * (max + 1 - min)) + min;
 export default generateRandomNumber;
