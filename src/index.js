@@ -7,7 +7,7 @@ export const gameEngine = (gameCondition, arrOfQuestionsAndAnswers) => {
   console.log('Welcome to the Brain Games!');
   console.log(`Hello, ${userName}!`);
   console.log(gameCondition);
-
+  // eslint-disable-next-line no-restricted-syntax
   for (const stepCount of arrOfQuestionsAndAnswers) {
     const [question, rightAnswer] = stepCount;
 
