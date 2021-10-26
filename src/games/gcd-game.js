@@ -9,7 +9,6 @@ const findGcd = (firstNumber, secondNumber) => {
 
   while (min && max) {
     [min, max] = [max % min, min];
-    console.log(min, max);
   }
   return max;
 };

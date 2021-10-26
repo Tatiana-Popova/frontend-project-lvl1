@@ -3,7 +3,7 @@ import { gameEngine, gameSteps } from '../index.js';
 
 const gameCondition = 'What number is missing in the progression?';
 
-const generateArrWithRandomNums = (firstNumOfProgression, lengthOfProgression, numDifference) => {
+const generateProgression = (firstNumOfProgression, lengthOfProgression, numDifference) => {
   const arrWithRandomNums = [];
   for (let count = 0; count < lengthOfProgression; count += 1) {
     const current = firstNumOfProgression + numDifference * count;
@@ -12,10 +12,10 @@ const generateArrWithRandomNums = (firstNumOfProgression, lengthOfProgression, n
   return arrWithRandomNums;
 };
 
-const generateProgression = (arrWithRandomNums, randomIndexForClose) => {
-  const arrWithProgression = [...arrWithRandomNums];
-  arrWithProgression[randomIndexForClose] = '..';
-  const strWithProgression = arrWithProgression.join(' ');
+const generateQuestion = (collection, randomIndexForClose) => {
+  const progression = [...collection];
+  progression[randomIndexForClose] = '..';
+  const strWithProgression = progression.join(' ');
   return strWithProgression;
 };
 
@@ -25,15 +25,15 @@ const generateQuestionAndAnswer = () => {
   const firstNumOfProgression = generateRandomNumber(1, 100);
   const numDifference = generateRandomNumber(-10, 10);
 
-  const progressionArr = generateArrWithRandomNums(
+  const progression = generateProgression(
     firstNumOfProgression,
     lengthOfProgression,
     numDifference,
   );
-  const progressionStr = generateProgression(progressionArr, randomIndexForClose);
+  const progressionStr = generateQuestion(progression, randomIndexForClose);
 
   const question = `${progressionStr}`;
-  const rightAnswer = progressionArr[randomIndexForClose].toString();
+  const rightAnswer = progression[randomIndexForClose].toString();
 
   return [question, rightAnswer];
 };
